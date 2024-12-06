@@ -21,6 +21,6 @@ app.use('*', (req, res, next) => {
   return res.status(404).json('Route not found')
 })
 
-app.listen(3000, () => {
-  console.log('El servidor está funcionando en: http://localhost:3000')
+app.listen(10000 , () => {
+  console.log('El servidor está funcionando en: http://localhost:10000')
 })
