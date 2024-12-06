@@ -1,8 +1,8 @@
 
 require('dotenv').config()
 const express = require('express')
-const { connectDB } = require('./src/api/config/db')
-const connectCloudinary = require('./src/api/config/cloudinary')
+const { connectDB } = require('./src/config/db')
+const connectCloudinary = require('./src/config/cloudinary')
 const userRoutes = require('./src/api/routes/usuarios')
 const eventoRouter = require('./src/api/routes/eventos')
 const app = express()
