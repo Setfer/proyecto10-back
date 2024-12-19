@@ -6,7 +6,9 @@ const eventoSchema = new mongoose.Schema(
     fecha: { type: Date, required: true },
     cartel: { type: String, required: true },
     asistentes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'usuarios' }],
-    descripcion: { type: String, required: true }
+    descripcion: { type: String, required: true },
+    organizador: { type: String }
+    
   },
   {
     timestamps: true,
