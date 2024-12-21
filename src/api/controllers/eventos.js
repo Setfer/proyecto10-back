@@ -1,6 +1,6 @@
 const { deleteFile } = require('../../utils/deleteFile')
 const Evento = require('../models/eventos')
-const fs = require("fs");
+
 
 const getAllEventos = async (req, res, next) => {
   try {
@@ -11,6 +11,38 @@ const getAllEventos = async (req, res, next) => {
   }
 }
 
+const getAllEventosByName = async (req, res, next) => {
+  try {
+    const allEventos = await Evento.find()
+      .populate("asistentes")
+      .sort({ evento: 1 });
+    return res.status(200).json(allEventos);
+  } catch (error) {
+    return res.status(400).json({ error: 'No se han podido obtener los eventos' });
+  }
+};
+
+const getAllEventosByAssistants = async (req, res, next) => {
+  try {
+    const allEventos = await Evento.find().populate("asistentes");
+    const sortedEventos = allEventos.sort((a, b) => b.asistentes.length - a.asistentes.length);
+
+    return res.status(200).json(sortedEventos);
+  } catch (error) {
+    return res.status(400).json({ error: 'No se han podido obtener los eventos' });
+  }
+};
+
+const getAllEventosByDate = async (req, res, next) => {
+  try {
+    const allEventos = await Evento.find()
+      .populate("asistentes")
+      .sort({ fecha: 1 });
+    return res.status(200).json(allEventos);
+  } catch (error) {
+    return res.status(400).json({ error: 'No se han podido obtener los eventos' });
+  }
+};
 
 
 const postEvento = async (req, res, next) => {
@@ -104,5 +136,8 @@ module.exports = {
   postEvento,
   updateEvento,
   deleteEvento,
-  removeUsuarioEvento
+  removeUsuarioEvento,
+  getAllEventosByName,
+  getAllEventosByDate,
+  getAllEventosByAssistants
 }
